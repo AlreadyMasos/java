@@ -1,6 +1,6 @@
 public class task3{
 	public static void main(String[] args){
-		System.out.println(checkPerfect(97));
+		System.out.println(isKaprekar(297));
 	}
 
 	//Задача 1
@@ -27,8 +27,8 @@ public class task3{
 		if (str.contains("zip")) return str.indexOf("zip") + 3; 
 		else return -1;
 	}
-	/*Задача
-	3. Создайте функцию, которая проверяет, является ли целое число совершенным
+	/*Задача 3 
+	Создайте функцию, которая проверяет, является ли целое число совершенным
 	числом или нет. Совершенное число - это число, которое можно записать как
 	сумму его множителей, исключая само число.
 	*/
@@ -42,6 +42,98 @@ public class task3{
 		else return false;
 
 	}
+	/*Задача 4
+	Создайте функцию, которая принимает строку и возвращает новую строку с
+	заменой ее первого и последнего символов, за исключением трех условий:
+	– Если длина строки меньше двух, верните "несовместимо".".
+	– Если первый и последний символы совпадают, верните "два-это пара.". 
+	*/
+	public static String flipEndChars(String str){
+		
+		if (str.length() == 1) return "Incompatible";
+		
+		if (str.charAt(0) == str.charAt(str.length() - 1)) return "Two is a pair";
+		
+		return str.charAt(str.length() - 1) + str.substring(1, str.length() - 1) + str.charAt(0);
+	}
+	/*Задача 5
+	Создайте функцию, которая определяет, является ли строка допустимым
+	шестнадцатеричным кодом.
+	*/
+	public static boolean isValidHexCode(String str){
+		
+		if (str.length() > 7) return false;
+		
+		if (str.matches("#[a-fA-F0-9]+")) return true;
+		
+		else return false;
+	}
+	/*Задача 6
+	Напишите функцию, которая возвращает true, если два массива имеют одинаковое
+	количество уникальных элементов, и false в противном случае.  
+	*/
+	 public static boolean same(int[] a, int[] b){
+        int unique1 = 0;
+        int unique2 = 0;
+        for (int i = 0; i < a.length; i++){
+            int temp = -1;
+            for (int j = 0; j < a.length; i++){
+                if(a[i] == a[j])temp++;
+            }
+            unique1 += temp;
+        }
+        for (int i = 0; i < b.length; i++){
+            int temp = -1;
+            for (int j = 0; j < b.length; i++){
+                if(b[i] == b[j])temp++;
+            }
+            unique2 += temp;
+        }
+        return a.length - unique1 == b.length - unique2;
+    }
+
+	//Задача 7
+    //Числа Капрекара
+
+    public static boolean isKaprekar(int a){
+    	if (a == 1) return true;
+    	int sq_a = a * a;
+    	int count_digits = 0;
+    	while (sq_a != 0){
+    		count_digits++;
+    		sq_a = sq_a / 10;
+    	}
+    	sq_a = a * a;
+
+    	for (int r_digits = 1; r_digits < count_digits; r_digits++){
+
+    		int equal_parts = (int) Math.pow(10,r_digits);
+
+    		if (equal_parts == a) continue;
+
+    		int sum = sq_a / equal_parts + sq_a % equal_parts;
+    		if (sum == a) return true;
+    	
+    	}
+    	return false;
+    }
+	
+
+	/*Задача 8
+	Напишите функцию, которая возвращает самую длинную последовательность
+	последовательных нулей в двоичной строке. 
+	*/
+
+	public static String longestZero(String str){
+		String[] tmp = str.split("1");
+        String max = "";
+        for (int i = 0; i < tmp.length; i++){
+            if (tmp[i].length() > max.length()) max = tmp[i];
+        }
+        return max;
+    }
+	
+
  	/*Задача 9
 	Если задано целое число, создайте функцию, которая возвращает следующее
 	простое число. Если число простое, верните само число. 
